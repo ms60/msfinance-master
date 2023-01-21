@@ -1,0 +1,6 @@
+https://mrjbq7.github.io/ta-lib/index.html
+https://pandas-datareader.readthedocs.io/en/latest/remote_data.html
+https://docs.python-guide.org/writing/structure/
+https://github.com/navdeep-G/samplemod
+https://github.com/kennethreitz/setup.py
+https://test.pypi.org/project/husamfinance-ms60/0.0.1/
