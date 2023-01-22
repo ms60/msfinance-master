@@ -115,7 +115,7 @@ class Instrument:
 
 
 	def isBalanced(self , otherInstrument):
-		if self.isEqual( otherInstrument ):
+		if self == otherInstrument:
 			return True
 		else:
 			return self.getData().index.equals(otherInstrument.getData().index)
