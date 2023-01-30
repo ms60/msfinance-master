@@ -1,6 +1,7 @@
 import pandas_datareader as web
 import pandas as pd
 from datetime import datetime,timedelta
+from dateutil.parser import parse
 from copy import deepcopy
 import matplotlib.pyplot as plt
 import mplcursors
@@ -80,12 +81,12 @@ class Instrument:
 
 	def getDataFromFile(self , fileName):
 
-		dateparse = lambda x: datetime.strptime(x, '%d.%m.%Y')
+		#dateparse = lambda x: datetime.strptime(x, '%d.%m.%Y')
 
 		if fileName.lower().endswith(".xlsx"):
-			self.data = pd.read_excel( fileName , parse_dates=['Date'], date_parser=dateparse ,index_col = "Date")
+			self.data = pd.read_excel( fileName , parse_dates=['Date'], date_parser=parse ,index_col = "Date")
 		elif fileName.lower().endswith(".csv"):
-			self.data = pd.read_csv( fileName , parse_dates=['Date'], date_parser=dateparse ,index_col = "Date")
+			self.data = pd.read_csv( fileName , parse_dates=['Date'], date_parser=parse ,index_col = "Date")
 		else:
 			raise ValueError("unknown file name")
 
@@ -98,7 +99,9 @@ class Instrument:
 			raise ValueError("start_date can not be bigger than end_date")		
 
 		#self.data  = web.DataReader(self.name, data_source='yahoo', start = start_date, end = end_date)
-		self.setData(web.data.get_data_yahoo(self.name,  start = start_date, end = end_date))
+		result_data = web.data.get_data_yahoo(self.name,  start = start_date, end = end_date)
+		result_data.index = result_data.index.date
+		self.setData(result_data)
 
 	def getDataFromToday(self , day_count , ds = "yahoo"):
 		""" backwards day_count day from today """
