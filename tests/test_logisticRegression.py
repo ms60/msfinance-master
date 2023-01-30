@@ -38,7 +38,7 @@ for stock_name in XU030:
     stock = Instrument(stock_name)
     stock.getDataStartToEnd( start_date, end_date )
 
-    total_df = stock.getData()[["Close"]].join(usd_try.getData()[["Close"]] , lsuffix= '_eregl' , rsuffix='_usdtry')
+    total_df = stock.getData()[["Close"]].join(usd_try.getData()[["Close"]] , lsuffix= '_stock' , rsuffix='_usdtry')
     total_df = total_df.join(cds_6m.getData()[['Price']] , rsuffix='_cds6m')
     total_df = total_df.join(cds_1y.getData()[['Price']] , rsuffix='_cds1y')
     total_df.columns = ['Target' , 'usdtry','cds6m','cds1y']
